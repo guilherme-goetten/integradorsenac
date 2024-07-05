@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
+import java.util.List;
+import model.Livro;
+
 /**
  *
  * @author guilh
@@ -148,6 +155,11 @@ public class Tela_exclusao extends javax.swing.JFrame {
         input_ano.setBounds(140, 160, 100, 30);
 
         button_pesquisar.setText("Pesquisar");
+        button_pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_pesquisarActionPerformed(evt);
+            }
+        });
         getContentPane().add(button_pesquisar);
         button_pesquisar.setBounds(360, 160, 80, 24);
 
@@ -217,44 +229,77 @@ public class Tela_exclusao extends javax.swing.JFrame {
     }//GEN-LAST:event_button_voltarActionPerformed
 
     private void button_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_excluirActionPerformed
-   
+    int row = table_list.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(null, "Por favor, selecione um livro na tabela.");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) table_list.getModel();
+    String isbn = (String) model.getValueAt(row, 4); // ISBN está na coluna 4
+
+    int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o livro com ISBN: " + isbn + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            Livro livro = new Livro();
+            livro.excluirLivro(isbn);
+            JOptionPane.showMessageDialog(null, "Livro excluído com sucesso.");
+
+            // Atualiza a tabela após a exclusão
+            button_pesquisarActionPerformed(evt); // Chama o método de pesquisa para atualizar a tabela
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir o livro: " + e.getMessage());
+        }
+      }
     }//GEN-LAST:event_button_excluirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela_exclusao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela_exclusao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela_exclusao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela_exclusao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void button_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pesquisarActionPerformed
+        
+        String titulo = input_titulo.getText();
+        String autor = input_autor.getText();
+        String genero = input_genero.getText();
+        String editora = input_editora.getText();
+        String isbn = input_isbn.getText();
+        String anoPublicacao = input_ano.getText();
+        String numeroPaginas = input_numero.getText();
 
-        /* Create and display the form */
+
+        
+        try {
+            Livro livro = new Livro();
+            List<Livro> resultados = livro.pesquisarLivro(titulo, autor, genero, editora, isbn, anoPublicacao, numeroPaginas);
+        if (resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum livro encontrado.");
+        }else {
+            // Criar um modelo de tabela para armazenar os resultados da pesquisa
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(new String[]{"Título", "Autor", "Gênero", "Editora", "ISBN", "ano_Publicacao", "numeroPaginas"});
+
+        for (Livro l : resultados) {
+            model.addRow(new Object[]{
+            l.getTitulo(),
+            l.getAutor(),
+            l.getGenero(),
+            l.getEditora(),
+            l.getIsbn(),
+            l.getAnoPublicacao(),
+            l.getNumeroPaginas()
+    });
+}         // Setar o modelo na tabela
+            table_list.setModel(model);
+        }
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro na pesquisa: " + e.getMessage());
+         }   
+    }//GEN-LAST:event_button_pesquisarActionPerformed
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Tela_exclusao().setVisible(true);
             }
         });
-    }
-
+    }   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton button_editar;
     private javax.swing.JToggleButton button_excluir;
@@ -279,4 +324,5 @@ public class Tela_exclusao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_list;
     // End of variables declaration//GEN-END:variables
+
 }

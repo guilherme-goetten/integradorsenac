@@ -28,7 +28,7 @@ public class conexao {
         String porta = "3306";
         String usuario = "root";
         String senha = "senacgoetten";
-        String banco = "biblioteca_db";
+        String banco = "biblioteca_integrador";
         
         //Verificar se conectou com o driver de conexão
         try {
@@ -40,7 +40,7 @@ public class conexao {
         //Executa a conexão
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + servidor + ":" + porta + "/" + banco, usuario, senha);
-            //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca_integrador", usuario, senha);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
