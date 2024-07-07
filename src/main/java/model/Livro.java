@@ -24,24 +24,26 @@ public class Livro {
     private String autor;
     private String genero;
     private String editora;
-    private String isbn;
     private String anoPublicacao;
     private String numeroPaginas;
+    private String estoque;
+    private String isbn;
     
     //Criando os contrutores da classe.
     
     public Livro(){}
     
     public Livro(String titulo, String autor, String genero, String editora, 
-                 String isbn, String anoPublicacao, String numeroPaginas){
+                 String anoPublicacao, String numeroPaginas, String estoque, String isbn){
     //Construtores.
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
         this.editora = editora;
-        this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
         this.numeroPaginas = numeroPaginas;
+        this.estoque = estoque;
+        this.isbn = isbn;
     }
 
  // Getters e setters para os campos
@@ -78,14 +80,6 @@ public class Livro {
         this.editora = editora;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public String getAnoPublicacao() {
         return anoPublicacao;
     }
@@ -101,8 +95,62 @@ public class Livro {
     public void setNumeroPaginas(String numeroPaginas) {
         this.numeroPaginas = numeroPaginas;
     }
+    
+        public String getestoque() {
+        return estoque;
+    }
 
-    public List<Livro> pesquisarLivro(String titulo, String autor, String genero, String editora, String isbn, String ano_Publicacao, String numero_Paginas) throws SQLException {
+    public void setestoque(String isbn) {
+        this.estoque = estoque;
+    }
+    
+        public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public boolean isDisponivel() throws SQLException {
+        Connection conn = getConnection();
+        String sql = "SELECT estoque FROM tb_livros WHERE titulo = ? AND autor = ? AND genero = ? AND ano_publicacao = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, this.titulo);
+        stmt.setString(2, this.autor);
+        stmt.setString(3, this.genero);
+        stmt.setString(4, this.anoPublicacao);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            int estoque = rs.getInt("estoque");
+            return estoque > 0;
+        } else {
+            return false;
+        }
+    }
+
+    public void baixarEstoque() throws SQLException {
+        Connection conn = getConnection();
+        String sql = "UPDATE tb_livros SET estoque = estoque - 1 WHERE titulo = ? AND autor = ? AND genero = ? AND ano_publicacao = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, this.titulo);
+        stmt.setString(2, this.autor);
+        stmt.setString(3, this.genero);
+        stmt.setString(4, this.anoPublicacao);
+        stmt.executeUpdate();
+    }
+    public void aumentarEstoque() throws SQLException {
+    Connection conn = getConnection();
+    String sql = "UPDATE tb_livros SET estoque = estoque + 1 WHERE titulo = ? AND autor = ? AND genero = ? AND ano_publicacao = ?";
+    PreparedStatement stmt = conn.prepareStatement(sql);
+    stmt.setString(1, this.titulo);
+    stmt.setString(2, this.autor);
+    stmt.setString(3, this.genero);
+    stmt.setString(4, this.anoPublicacao);
+    stmt.executeUpdate();
+}
+    
+    public List<Livro> pesquisarLivro(String titulo, String autor, String genero, String editora) throws SQLException {
         List<Livro> resultados = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT * FROM tb_livros WHERE 1=1");
 
@@ -118,14 +166,17 @@ public class Livro {
         if (editora != null && !editora.isEmpty()) {
             sql.append(" AND editora LIKE ?");
         }
-        if (isbn != null && !isbn.isEmpty()) {
-            sql.append(" AND isbn LIKE ?");
-        }
         if (anoPublicacao != null && !anoPublicacao.isEmpty()) {
             sql.append(" AND ano_Publicacao = ?");
         }
         if (numeroPaginas != null && !numeroPaginas.isEmpty()) {
             sql.append(" AND numero_Paginas = ?");
+        }
+        if (estoque != null && !estoque.isEmpty()) {
+            sql.append(" AND estoque LIKE ?");
+        }
+        if (isbn != null && !isbn.isEmpty()) {
+            sql.append(" AND isbn LIKE ?");
         }
 
         try (Connection conn = getConnection();
@@ -143,14 +194,17 @@ public class Livro {
             if (editora != null && !editora.isEmpty()) {
                 stmt.setString(index++, "%" + editora + "%");
             }
-            if (isbn != null && !isbn.isEmpty()) {
-                stmt.setString(index++, "%" + isbn + "%");
-            }
             if (anoPublicacao != null && !anoPublicacao.isEmpty()) {
                 stmt.setString(index++, anoPublicacao);
             }
             if (numeroPaginas != null && !numeroPaginas.isEmpty()) {
                 stmt.setString(index++, numeroPaginas);
+            }
+            if (estoque != null && !estoque.isEmpty()) {
+                stmt.setString(index++, "%" + estoque + "%");
+            }
+            if (isbn != null && !isbn.isEmpty()) {
+                stmt.setString(index++, "%" + isbn + "%");
             }
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -159,10 +213,11 @@ public class Livro {
                         rs.getString("titulo"),
                         rs.getString("autor"),
                         rs.getString("genero"),
-                        rs.getString("editora"),
-                        rs.getString("isbn"),
+                        rs.getString("editora"),                       
                         rs.getString("ano_Publicacao"),
-                        rs.getString("numero_Paginas")
+                        rs.getString("numero_Paginas"),
+                        rs.getString("estoque"),
+                        rs.getString("isbn")
                     );
                     resultados.add(livro);
                 }
@@ -172,7 +227,7 @@ public class Livro {
     }
     // Método para cadastrar livro
     public void cadastrarLivro(Livro livro) throws SQLException {
-        String sql = "INSERT INTO tb_livros (titulo, autor, genero, editora, isbn, ano_Publicacao, numero_Paginas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_livros (titulo, autor, genero, editora, ano_Publicacao, numero_Paginas, estoque, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -180,25 +235,66 @@ public class Livro {
             stmt.setString(1, livro.getTitulo());
             stmt.setString(2, livro.getAutor());
             stmt.setString(3, livro.getGenero());
-            stmt.setString(4, livro.getEditora());
-            stmt.setString(5, livro.getIsbn());
-            stmt.setString(6, livro.getAnoPublicacao());
-            stmt.setString(7, livro.getNumeroPaginas());
+            stmt.setString(4, livro.getEditora());          
+            stmt.setString(5, livro.getAnoPublicacao());
+            stmt.setString(6, livro.getNumeroPaginas());
+            stmt.setString(7, livro.getestoque());
+            stmt.setString(8, livro.getIsbn());
             
             stmt.executeUpdate();
         }
     }
     // Método para excluir livro
     public void excluirLivro(String isbn) throws SQLException {
-        String sql = "DELETE FROM tb_livros WHERE isbn = ?";
         
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setString(1, isbn);
-            stmt.executeUpdate();
+        Connection conn = getConnection();
+        String sql = "DELETE FROM tb_livros WHERE titulo = ? AND autor = ? AND genero = ? AND ano_publicacao = ?";
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+
+        // Adicionando mais informações de depuração
+        System.out.println("SQL Query: " + sql);
+        System.out.println("Parâmetros: " + this.titulo + ", " + this.autor + ", " + this.genero + ", " + this.anoPublicacao);
+
+        stmt.setString(1, this.titulo);
+        stmt.setString(2, this.autor);
+        stmt.setString(3, this.genero);
+        stmt.setString(4, this.anoPublicacao);
+        stmt.executeUpdate();
+        
+        int rowsAffected = stmt.executeUpdate();
+    if (rowsAffected > 0) {
+        System.out.println("Livro excluído com sucesso!");
+    } else {
+        System.out.println("Nenhum livro encontrado com os parâmetros fornecidos.");
         }
     }
+        public void editarLivro(Livro livro) throws SQLException {
+        String sql = "UPDATE tb_livros SET TITULO = ?, AUTOR = ?, GENERO = ?, EDITORA = ?, ANO_PUBLICACAO = ?, NUMERO_PAGINAS = ?, ESTOQUE = ? WHERE ISBN = ?";
+       
+        try (Connection conn = getConnection()) {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, livro.getTitulo());
+            pstm.setString(2, livro.getAutor());
+            pstm.setString(3, livro.getGenero());
+            pstm.setString(4, livro.getEditora());
+            pstm.setString(5, livro.getAnoPublicacao());
+            pstm.setString(6, livro.getNumeroPaginas());
+            pstm.setString(7, livro.getestoque());
+            pstm.setString(8, livro.getIsbn());
+
+            int rowsUpdated = pstm.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Livro atualizado com sucesso.");
+            } else {
+                System.out.println("Nenhum livro encontrado com o ISBN fornecido.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar o livro: " + e.getMessage());
+            throw e;
+        }
+    }
+
     // Método para obter conexão com o banco de dados
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/biblioteca_integrador";

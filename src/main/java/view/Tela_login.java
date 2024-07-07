@@ -34,7 +34,6 @@ public class Tela_login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         input_senha = new javax.swing.JPasswordField();
         button_ok = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de login");
@@ -88,12 +87,8 @@ public class Tela_login extends javax.swing.JFrame {
         getContentPane().add(button_ok);
         button_ok.setBounds(160, 200, 110, 27);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guilh\\Desktop\\image 13.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 450, 260);
-
-        pack();
+        setSize(new java.awt.Dimension(462, 299));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void input_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_usuarioActionPerformed
@@ -178,7 +173,6 @@ public class Tela_login extends javax.swing.JFrame {
     private javax.swing.JToggleButton button_ok;
     private javax.swing.JPasswordField input_senha;
     private javax.swing.JTextField input_usuario;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

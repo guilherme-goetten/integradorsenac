@@ -4,6 +4,14 @@
  */
 package view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Livro;
+
 /**
  *
  * @author guilh
@@ -16,7 +24,6 @@ public class Aluno extends javax.swing.JFrame {
     public Aluno() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,25 +43,27 @@ public class Aluno extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         input_ano = new javax.swing.JTextField();
         button_emprestar = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        button_pesquiar = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_list2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela_aluno");
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(490, 398));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Biblioteca do Aluno Senac");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 10, 350, 35);
+        jLabel2.setBounds(190, 10, 350, 35);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Título:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(210, 60, 80, 26);
+        jLabel3.setBounds(10, 60, 80, 26);
 
         input_titulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,13 +71,13 @@ public class Aluno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(input_titulo);
-        input_titulo.setBounds(120, 90, 270, 30);
+        input_titulo.setBounds(100, 60, 270, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Autor:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(210, 130, 70, 26);
+        jLabel4.setBounds(380, 60, 70, 26);
 
         input_autor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,36 +85,78 @@ public class Aluno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(input_autor);
-        input_autor.setBounds(120, 160, 270, 30);
+        input_autor.setBounds(450, 60, 270, 30);
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Gênero:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(210, 200, 80, 26);
+        jLabel5.setBounds(10, 100, 80, 26);
         getContentPane().add(input_genero);
-        input_genero.setBounds(120, 230, 270, 30);
+        input_genero.setBounds(100, 100, 270, 30);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Ano de Publicação:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(160, 270, 200, 30);
+        jLabel6.setBounds(10, 140, 200, 30);
         getContentPane().add(input_ano);
-        input_ano.setBounds(120, 300, 270, 30);
+        input_ano.setBounds(210, 140, 160, 30);
 
         button_emprestar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         button_emprestar.setForeground(new java.awt.Color(0, 0, 0));
         button_emprestar.setText("Emprestar");
+        button_emprestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_emprestarActionPerformed(evt);
+            }
+        });
         getContentPane().add(button_emprestar);
-        button_emprestar.setBounds(210, 350, 100, 27);
+        button_emprestar.setBounds(580, 140, 110, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guilh\\Desktop\\image 13.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 490, 400);
+        button_pesquiar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        button_pesquiar.setForeground(new java.awt.Color(0, 0, 0));
+        button_pesquiar.setText("Pesquisar");
+        button_pesquiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_pesquiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_pesquiar);
+        button_pesquiar.setBounds(420, 140, 120, 30);
 
-        pack();
+        table_list2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Título", "Autor", "Gênero", "Ano de Publicação"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(table_list2);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(20, 210, 700, 180);
+
+        setSize(new java.awt.Dimension(756, 439));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void input_autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_autorActionPerformed
@@ -115,6 +166,69 @@ public class Aluno extends javax.swing.JFrame {
     private void input_tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_tituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_input_tituloActionPerformed
+
+    private void button_pesquiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pesquiarActionPerformed
+        
+        String titulo = input_titulo.getText();
+        String autor = input_autor.getText();
+        String genero = input_genero.getText();
+        String anoPublicacao = input_ano.getText();
+
+        try {
+            Livro livro = new Livro();
+            List<Livro> resultados = livro.pesquisarLivro(titulo, autor, genero, anoPublicacao);
+        if (resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum livro encontrado.");
+        }else {
+            // Criar um modelo de tabela para armazenar os resultados da pesquisa
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(new String[]{"Título", "Autor", "Gênero", "ano_Publicacao"});
+
+        for (Livro l : resultados) {
+            model.addRow(new Object[]{
+            l.getTitulo(),
+            l.getAutor(),
+            l.getGenero(),
+            l.getAnoPublicacao(),
+    });
+}         // Setar o modelo na tabela
+            table_list2.setModel(model);
+        }
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro na pesquisa: " + e.getMessage());
+         }   
+    }//GEN-LAST:event_button_pesquiarActionPerformed
+
+    private void button_emprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_emprestarActionPerformed
+                
+        int selectedRow = table_list2.getSelectedRow();
+        if (selectedRow >= 0) {
+            String titulo = table_list2.getValueAt(selectedRow, 0).toString();
+            String autor = table_list2.getValueAt(selectedRow, 1).toString();
+            String genero = table_list2.getValueAt(selectedRow, 2).toString();
+            String anoPublicacao = table_list2.getValueAt(selectedRow, 3).toString();
+
+            try {
+                Livro livro = new Livro();
+                livro.setTitulo(titulo);
+                livro.setAutor(autor);
+                livro.setGenero(genero);
+                livro.setAnoPublicacao(anoPublicacao);
+
+                if (livro.isDisponivel()) {
+                    livro.baixarEstoque();
+                    JOptionPane.showMessageDialog(null, "Livro emprestado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "O livro já está alocado para outro aluno.");
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao emprestar livro: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um livro para emprestar.");
+        }
+
+    }//GEN-LAST:event_button_emprestarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,15 +267,17 @@ public class Aluno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton button_emprestar;
+    private javax.swing.JToggleButton button_pesquiar;
     private javax.swing.JTextField input_ano;
     private javax.swing.JTextField input_autor;
     private javax.swing.JTextField input_genero;
     private javax.swing.JTextField input_titulo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable table_list2;
     // End of variables declaration//GEN-END:variables
 }

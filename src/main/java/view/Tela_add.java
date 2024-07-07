@@ -5,6 +5,8 @@
 package view;
 
 import Controller.ControllerLivro;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,16 @@ public class Tela_add extends javax.swing.JFrame {
      */
     public Tela_add() {
         initComponents();
+        setWindowProperties();
+    }
+    // Método para definir as propriedades da janela
+    private void setWindowProperties() {
+        // Define o tamanho da janela
+        setSize(540,590);
+        
+        // Centraliza a janela
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -31,7 +43,7 @@ public class Tela_add extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        input_titulo = new javax.swing.JTextField();
+        input_qtd = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         input_genero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -45,57 +57,58 @@ public class Tela_add extends javax.swing.JFrame {
         input_isbn = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         input_ano = new javax.swing.JTextField();
-        button_editar = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        button_voltar = new javax.swing.JToggleButton();
+        jLabel10 = new javax.swing.JLabel();
+        input_titulo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Área do Professor Senac");
+        jLabel2.setText("Biblioteca Senac");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(130, 10, 250, 26);
+        jLabel2.setBounds(180, 0, 190, 26);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Título:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(120, 50, 80, 26);
-        getContentPane().add(input_titulo);
-        input_titulo.setBounds(120, 80, 270, 30);
+        jLabel3.setBounds(120, 30, 80, 26);
+        getContentPane().add(input_qtd);
+        input_qtd.setBounds(120, 420, 270, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Gênero:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(120, 170, 80, 26);
+        jLabel4.setBounds(120, 150, 80, 26);
         getContentPane().add(input_genero);
-        input_genero.setBounds(120, 200, 270, 30);
+        input_genero.setBounds(120, 180, 270, 30);
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Editora:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(120, 230, 80, 26);
+        jLabel5.setBounds(120, 210, 80, 26);
         getContentPane().add(input_editora);
-        input_editora.setBounds(120, 260, 270, 30);
+        input_editora.setBounds(120, 240, 270, 30);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Número de Páginas:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(120, 410, 200, 30);
+        jLabel6.setBounds(120, 330, 200, 30);
         getContentPane().add(input_numero);
-        input_numero.setBounds(120, 440, 270, 30);
+        input_numero.setBounds(120, 360, 270, 30);
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Autor:");
+        jLabel7.setText("Autor(a):");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(120, 110, 80, 26);
+        jLabel7.setBounds(120, 90, 90, 26);
         getContentPane().add(input_autor);
-        input_autor.setBounds(120, 140, 270, 30);
+        input_autor.setBounds(120, 120, 270, 30);
 
         button_add.setText("Adicionar");
         button_add.addActionListener(new java.awt.event.ActionListener() {
@@ -104,32 +117,52 @@ public class Tela_add extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button_add);
-        button_add.setBounds(120, 480, 110, 24);
+        button_add.setBounds(120, 520, 110, 24);
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ISBN:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(120, 290, 80, 30);
+        jLabel8.setBounds(120, 450, 80, 30);
+
+        input_isbn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_isbnActionPerformed(evt);
+            }
+        });
         getContentPane().add(input_isbn);
-        input_isbn.setBounds(120, 320, 270, 30);
+        input_isbn.setBounds(120, 480, 270, 30);
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Ano de Publicação:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(120, 350, 200, 30);
+        jLabel9.setBounds(120, 270, 200, 30);
+
+        input_ano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_anoActionPerformed(evt);
+            }
+        });
         getContentPane().add(input_ano);
-        input_ano.setBounds(120, 380, 270, 30);
+        input_ano.setBounds(120, 300, 270, 30);
 
-        button_editar.setText("Editar");
-        getContentPane().add(button_editar);
-        button_editar.setBounds(280, 480, 110, 24);
+        button_voltar.setText("Voltar");
+        button_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_voltarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_voltar);
+        button_voltar.setBounds(280, 520, 110, 24);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guilh\\Desktop\\senac.prof.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(-120, 0, 650, 510);
+        jLabel10.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Quantidade:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(120, 390, 130, 30);
+        getContentPane().add(input_titulo);
+        input_titulo.setBounds(120, 60, 270, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,17 +173,18 @@ public class Tela_add extends javax.swing.JFrame {
         String titulo = input_titulo.getText();
         String autor = input_autor.getText();
         String genero = input_genero.getText();
-        String editora = input_editora.getText();
-        String isbn = input_isbn.getText();
+        String editora = input_editora.getText();       
         String anoPublicacao = input_ano.getText();
         String numeroPaginas = input_numero.getText();
+        String estoque = input_qtd.getText();
+        String isbn = input_isbn.getText();
         
 
         
         try {
             //instanciando a variavel controllerLivro
             ControllerLivro controllerLivro = new ControllerLivro ();
-            sucesso = controllerLivro.cadastrarLivro(titulo, autor, genero, editora, isbn, anoPublicacao, numeroPaginas);
+            sucesso = controllerLivro.cadastrarLivro(titulo, autor, genero, editora, anoPublicacao, numeroPaginas, estoque,isbn);
 
             if (sucesso){
 
@@ -166,6 +200,22 @@ public class Tela_add extends javax.swing.JFrame {
         }
  
     }//GEN-LAST:event_button_addActionPerformed
+
+    private void button_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_voltarActionPerformed
+        // Criar uma nova instância da tela Professor
+        Professor telaProfessor = new Professor();
+        telaProfessor.setVisible(true);
+        // Ocultar a tela de exclusão atual
+        this.dispose();
+    }//GEN-LAST:event_button_voltarActionPerformed
+
+    private void input_anoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_anoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input_anoActionPerformed
+
+    private void input_isbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_isbnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input_isbnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,15 +254,16 @@ public class Tela_add extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton button_add;
-    private javax.swing.JToggleButton button_editar;
+    private javax.swing.JToggleButton button_voltar;
     private javax.swing.JTextField input_ano;
     private javax.swing.JTextField input_autor;
     private javax.swing.JTextField input_editora;
     private javax.swing.JTextField input_genero;
     private javax.swing.JTextField input_isbn;
     private javax.swing.JTextField input_numero;
+    private javax.swing.JTextField input_qtd;
     private javax.swing.JTextField input_titulo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

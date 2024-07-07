@@ -4,7 +4,9 @@
  */
 package view;
 
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
+import conexaoBD.ConexaoLivro;
+import java.awt.HeadlessException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
@@ -22,6 +24,15 @@ public class Tela_exclusao extends javax.swing.JFrame {
      */
     public Tela_exclusao() {
         initComponents();
+        setWindowProperties();
+    }
+    // Método para definir as propriedades da janela
+    private void setWindowProperties() {
+        // Define o tamanho da janela
+        setSize(673,500);
+        
+        // Centraliza a janela
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,6 +44,8 @@ public class Tela_exclusao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel10 = new javax.swing.JLabel();
+        input_isbn1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         input_titulo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -46,7 +59,7 @@ public class Tela_exclusao extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         input_editora = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        input_isbn = new javax.swing.JTextField();
+        input_estoque = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         input_ano = new javax.swing.JTextField();
         button_pesquisar = new javax.swing.JToggleButton();
@@ -54,7 +67,19 @@ public class Tela_exclusao extends javax.swing.JFrame {
         button_excluir = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_list = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        input_isbn = new javax.swing.JTextField();
+        button_devolver = new javax.swing.JToggleButton();
+
+        jLabel10.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("ISBN:");
+
+        input_isbn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_isbn1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -111,9 +136,9 @@ public class Tela_exclusao extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Área do Professor Senac");
+        jLabel2.setText("Biblioteca Senac");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(180, 0, 250, 26);
+        jLabel2.setBounds(240, 0, 200, 26);
 
         button_voltar.setText("Voltar");
         button_voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +147,7 @@ public class Tela_exclusao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button_voltar);
-        button_voltar.setBounds(270, 160, 80, 24);
+        button_voltar.setBounds(50, 410, 90, 24);
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -134,25 +159,25 @@ public class Tela_exclusao extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("ISBN:");
+        jLabel8.setText("Estoque:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 120, 60, 30);
+        jLabel8.setBounds(10, 160, 80, 30);
 
-        input_isbn.addActionListener(new java.awt.event.ActionListener() {
+        input_estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                input_isbnActionPerformed(evt);
+                input_estoqueActionPerformed(evt);
             }
         });
-        getContentPane().add(input_isbn);
-        input_isbn.setBounds(90, 120, 220, 30);
+        getContentPane().add(input_estoque);
+        input_estoque.setBounds(90, 160, 220, 30);
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Ano Publicação:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 160, 130, 30);
+        jLabel9.setBounds(10, 120, 130, 30);
         getContentPane().add(input_ano);
-        input_ano.setBounds(140, 160, 100, 30);
+        input_ano.setBounds(140, 120, 170, 30);
 
         button_pesquisar.setText("Pesquisar");
         button_pesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,11 +186,16 @@ public class Tela_exclusao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button_pesquisar);
-        button_pesquisar.setBounds(360, 160, 80, 24);
+        button_pesquisar.setBounds(160, 410, 100, 24);
 
         button_editar.setText("Editar");
+        button_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_editarActionPerformed(evt);
+            }
+        });
         getContentPane().add(button_editar);
-        button_editar.setBounds(450, 160, 70, 24);
+        button_editar.setBounds(280, 410, 90, 24);
 
         button_excluir.setText("Excluir");
         button_excluir.addActionListener(new java.awt.event.ActionListener() {
@@ -174,21 +204,27 @@ public class Tela_exclusao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button_excluir);
-        button_excluir.setBounds(528, 160, 70, 24);
+        button_excluir.setBounds(390, 410, 90, 24);
 
         table_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "Gênero", "Editora", "ISBN", "Nº de Páginas", "Ano de Publicação"
+                "Título", "Autor", "Gênero", "Editora", "Nº de Páginas", "Ano de Publicação", "Estoque", "ISBN"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -198,12 +234,30 @@ public class Tela_exclusao extends javax.swing.JFrame {
         jScrollPane1.setViewportView(table_list);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(13, 210, 590, 320);
+        jScrollPane1.setBounds(10, 210, 640, 180);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guilh\\Desktop\\senac.prof.jpg")); // NOI18N
-        jLabel1.setText("Editar");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(-80, 0, 700, 540);
+        jLabel11.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("ISBN:");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(320, 160, 60, 30);
+
+        input_isbn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_isbnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(input_isbn);
+        input_isbn.setBounds(380, 160, 220, 30);
+
+        button_devolver.setText("Devolver");
+        button_devolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_devolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_devolver);
+        button_devolver.setBounds(500, 410, 100, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,12 +274,17 @@ public class Tela_exclusao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_input_generoActionPerformed
 
-    private void input_isbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_isbnActionPerformed
+    private void input_estoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_estoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_input_isbnActionPerformed
+    }//GEN-LAST:event_input_estoqueActionPerformed
 
     private void button_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_voltarActionPerformed
-        // TODO add your handling code here:
+        // Criar uma nova instância da tela Professor
+        Professor telaProfessor = new Professor();
+        telaProfessor.setVisible(true);
+
+        // Ocultar a tela de exclusão atual
+        this.dispose();
     }//GEN-LAST:event_button_voltarActionPerformed
 
     private void button_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_excluirActionPerformed
@@ -234,17 +293,18 @@ public class Tela_exclusao extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Por favor, selecione um livro na tabela.");
         return;
     }
-
     DefaultTableModel model = (DefaultTableModel) table_list.getModel();
-    String isbn = (String) model.getValueAt(row, 4); // ISBN está na coluna 4
+    String titulo = (String) model.getValueAt(row, 0); // titulo está na coluna 0
 
-    int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o livro com ISBN: " + isbn + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+    int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o livro: " + titulo + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
     if (confirm == JOptionPane.YES_OPTION) {
+            int selectedRow = 0;
+            model.removeRow(selectedRow);
         try {
             Livro livro = new Livro();
-            livro.excluirLivro(isbn);
+            livro.excluirLivro(titulo);
             JOptionPane.showMessageDialog(null, "Livro excluído com sucesso.");
-
+            
             // Atualiza a tabela após a exclusão
             button_pesquisarActionPerformed(evt); // Chama o método de pesquisa para atualizar a tabela
 
@@ -260,31 +320,31 @@ public class Tela_exclusao extends javax.swing.JFrame {
         String autor = input_autor.getText();
         String genero = input_genero.getText();
         String editora = input_editora.getText();
-        String isbn = input_isbn.getText();
         String anoPublicacao = input_ano.getText();
         String numeroPaginas = input_numero.getText();
-
-
+        String estoque = input_estoque.getText();
+        String isbn = input_isbn.getText();
         
         try {
             Livro livro = new Livro();
-            List<Livro> resultados = livro.pesquisarLivro(titulo, autor, genero, editora, isbn, anoPublicacao, numeroPaginas);
+            List<Livro> resultados = livro.pesquisarLivro(titulo, autor, genero, editora);
         if (resultados.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum livro encontrado.");
         }else {
             // Criar um modelo de tabela para armazenar os resultados da pesquisa
             DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(new String[]{"Título", "Autor", "Gênero", "Editora", "ISBN", "ano_Publicacao", "numeroPaginas"});
+            model.setColumnIdentifiers(new String[]{"Título", "Autor", "Gênero", "Editora", "ano_Publicacao", "numeroPaginas", "estoque", "ISBN"});
 
         for (Livro l : resultados) {
             model.addRow(new Object[]{
             l.getTitulo(),
             l.getAutor(),
             l.getGenero(),
-            l.getEditora(),
-            l.getIsbn(),
+            l.getEditora(),           
             l.getAnoPublicacao(),
-            l.getNumeroPaginas()
+            l.getNumeroPaginas(),
+            l.getestoque(),
+            l.getIsbn()
     });
 }         // Setar o modelo na tabela
             table_list.setModel(model);
@@ -293,6 +353,85 @@ public class Tela_exclusao extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Erro na pesquisa: " + e.getMessage());
          }   
     }//GEN-LAST:event_button_pesquisarActionPerformed
+
+    private void button_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_editarActionPerformed
+                
+    int row = table_list.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(null, "Por favor, selecione um livro na tabela.");
+        return;
+    }
+
+    try {
+        String titulo = input_titulo.getText();
+        String autor = input_autor.getText();
+        String genero = input_genero.getText();
+        String editora = input_editora.getText();       
+        String anoPublicacao = input_ano.getText();
+        String numeroPaginas = input_numero.getText();
+        String estoque = input_estoque.getText();
+        String isbn = input_isbn.getText();
+
+        Livro livro = new Livro();
+        livro.setTitulo(titulo);
+        livro.setAutor(autor);
+        livro.setGenero(genero);
+        livro.setEditora(editora);       
+        livro.setAnoPublicacao(anoPublicacao);
+        livro.setNumeroPaginas(numeroPaginas);
+        livro.setestoque(estoque);
+        livro.setIsbn(isbn);
+
+        ConexaoLivro conexaoLivro = new ConexaoLivro();
+        conexaoLivro.editarLivro(livro);
+
+        JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso.");
+    } catch (HeadlessException e) {
+        JOptionPane.showMessageDialog(null, "Erro na edição: " + e.getMessage());
+        }
+    }//GEN-LAST:event_button_editarActionPerformed
+
+    private void input_isbn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_isbn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input_isbn1ActionPerformed
+
+    private void input_isbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_isbnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_input_isbnActionPerformed
+
+    private void button_devolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_devolverActionPerformed
+                
+int selectedRow = table_list.getSelectedRow();
+    if (selectedRow >= 0) {
+        String titulo = table_list.getValueAt(selectedRow, 0).toString();
+        String autor = table_list.getValueAt(selectedRow, 1).toString();
+        String genero = table_list.getValueAt(selectedRow, 2).toString();
+        String editora = table_list.getValueAt(selectedRow, 3).toString();
+        String numeroPaginas = table_list.getValueAt(selectedRow, 5).toString();
+        String anoPublicacao = table_list.getValueAt(selectedRow, 4).toString();      
+        String estoque = table_list.getValueAt(selectedRow, 6).toString();
+        String isbn = table_list.getValueAt(selectedRow, 7).toString();
+
+        try {
+            Livro livro = new Livro();
+            livro.setTitulo(titulo);
+            livro.setAutor(autor);
+            livro.setGenero(genero);
+            livro.setEditora(editora);
+            livro.setNumeroPaginas(numeroPaginas);
+            livro.setAnoPublicacao(anoPublicacao);
+            livro.setestoque(estoque);
+            livro.setIsbn(isbn);                    
+            livro.aumentarEstoque();
+            
+            JOptionPane.showMessageDialog(null, "Livro devolvido com sucesso!");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao devolver livro: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Por favor, selecione um livro para devolver.");
+        }
+    }//GEN-LAST:event_button_devolverActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -301,6 +440,7 @@ public class Tela_exclusao extends javax.swing.JFrame {
         });
     }   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton button_devolver;
     private javax.swing.JToggleButton button_editar;
     private javax.swing.JToggleButton button_excluir;
     private javax.swing.JToggleButton button_pesquisar;
@@ -308,11 +448,14 @@ public class Tela_exclusao extends javax.swing.JFrame {
     private javax.swing.JTextField input_ano;
     private javax.swing.JTextField input_autor;
     private javax.swing.JTextField input_editora;
+    private javax.swing.JTextField input_estoque;
     private javax.swing.JTextField input_genero;
     private javax.swing.JTextField input_isbn;
+    private javax.swing.JTextField input_isbn1;
     private javax.swing.JTextField input_numero;
     private javax.swing.JTextField input_titulo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

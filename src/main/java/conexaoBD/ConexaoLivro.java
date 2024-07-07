@@ -2,9 +2,8 @@
 package conexaoBD;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.SQLException;
-//import model.Livro;
+import model.Livro;
 
 public class ConexaoLivro {
     
@@ -21,17 +20,8 @@ public class ConexaoLivro {
         }
     }
 
-//    public void cadastrarLivro(Livro livro) throws SQLException {
-//        String sql = "INSERT INTO livros (titulo, autor, genero, editora, isbn, anoPublicacao, numeroPaginas) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//        try (Connection conn = getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(sql)) {
-//            stmt.setString(1, livro.getTitulo());
-//            stmt.setString(2, livro.getAutor());
-//            stmt.setString(3, livro.getGenero());
-//            stmt.setString(4, livro.getEditora());
-//            stmt.setString(5, livro.getIsbn());
-//            stmt.setString(6, livro.getAnoPublicacao());
-//            stmt.setString(7, livro.getNumeroPaginas());
-//            stmt.executeUpdate();
-        }
+    public void editarLivro(Livro livro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
     

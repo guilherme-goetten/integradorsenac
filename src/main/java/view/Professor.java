@@ -29,7 +29,6 @@ public class Professor extends javax.swing.JFrame {
         button_addLivro = new javax.swing.JToggleButton();
         button_editarLivro = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -56,16 +55,12 @@ public class Professor extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Área do Professor Senac");
+        jLabel2.setText("Biblioteca Senac");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(130, 10, 250, 26);
+        jLabel2.setBounds(160, 10, 190, 26);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\guilh\\Desktop\\image 13.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 516, 250);
-
-        pack();
+        setSize(new java.awt.Dimension(531, 287));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_addLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addLivroActionPerformed
@@ -122,7 +117,6 @@ public class Professor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton button_addLivro;
     private javax.swing.JToggleButton button_editarLivro;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

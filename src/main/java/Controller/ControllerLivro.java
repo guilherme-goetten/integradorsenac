@@ -15,13 +15,13 @@ import model.Livro;
 public class ControllerLivro {
     
     public Boolean cadastrarLivro(String titulo, String autor, String genero, String editora, 
-                                    String isbn, String ano_Publicacao, String numero_Paginas) throws Exception{
+                                  String ano_Publicacao, String numero_Paginas, String estoque, String isbn) throws Exception{
         
-    if(!titulo.equals("") && !autor.equals("") && !genero.equals("") && !editora.equals("") && !isbn.equals("")  
-            && !ano_Publicacao.equals("") && !numero_Paginas.equals("")){
+    if(!titulo.equals("") && !autor.equals("") && !genero.equals("") && !editora.equals("")  
+       && !ano_Publicacao.equals("") && !numero_Paginas.equals("") && !estoque.equals("") && !isbn.equals("")){
         
         //Criando o objeto do livro
-        Livro livro = new Livro(titulo, autor, genero, editora, isbn, ano_Publicacao, numero_Paginas);
+        Livro livro = new Livro(titulo, autor, genero, editora, ano_Publicacao, numero_Paginas, estoque, isbn);
         
         livro.cadastrarLivro(livro);
      return true;
@@ -29,9 +29,9 @@ public class ControllerLivro {
         return false;
     }
 public List<Livro> pesquisarLivro(String titulo, String autor, String genero, String editora,
-                                  String isbn, String anoPublicacao, String numeroPaginas) throws SQLException { 
+                                  String anoPublicacao, String numeroPaginas,String estoque,String isbn) throws SQLException { 
        Livro livro = new Livro();
-    return livro.pesquisarLivro(titulo, autor, genero, editora, isbn, anoPublicacao, numeroPaginas);
+    return livro.pesquisarLivro(titulo, autor, genero, editora);
 
  
     }
