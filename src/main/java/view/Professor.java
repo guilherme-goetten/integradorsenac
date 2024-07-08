@@ -15,6 +15,7 @@ public class Professor extends javax.swing.JFrame {
      */
     public Professor() {
         initComponents();
+        
     }
 
     /**
@@ -31,6 +32,7 @@ public class Professor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(null);
 
         button_addLivro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -66,7 +68,7 @@ public class Professor extends javax.swing.JFrame {
     private void button_addLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addLivroActionPerformed
                
         Tela_add telaAdd = new Tela_add();
-        telaAdd.setSize(800,800);
+        telaAdd.setSize(523,590);
         telaAdd.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_button_addLivroActionPerformed
@@ -74,7 +76,7 @@ public class Professor extends javax.swing.JFrame {
     private void button_editarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_editarLivroActionPerformed
                 
         Tela_exclusao telaExclusao = new Tela_exclusao();
-        telaExclusao.setSize(800, 800);
+        telaExclusao.setSize(662, 480);
         telaExclusao.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_button_editarLivroActionPerformed

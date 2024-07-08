@@ -116,7 +116,7 @@ public class Tela_login extends javax.swing.JFrame {
         
         
             Professor telaProf = new Professor();
-            telaProf.setSize(800, 800);
+            telaProf.setSize(515, 248);
             telaProf.setVisible(true);
             this.setVisible(false);
         
@@ -124,7 +124,7 @@ public class Tela_login extends javax.swing.JFrame {
     
 
         Aluno telaAluno = new Aluno();
-        telaAluno.setSize(800, 800);
+        telaAluno.setSize(740, 400);
         telaAluno.setVisible(true);
         this.setVisible(false);
     } else {

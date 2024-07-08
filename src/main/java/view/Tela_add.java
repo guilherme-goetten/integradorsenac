@@ -5,8 +5,6 @@
 package view;
 
 import Controller.ControllerLivro;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,15 +18,6 @@ public class Tela_add extends javax.swing.JFrame {
      */
     public Tela_add() {
         initComponents();
-        setWindowProperties();
-    }
-    // Método para definir as propriedades da janela
-    private void setWindowProperties() {
-        // Define o tamanho da janela
-        setSize(540,590);
-        
-        // Centraliza a janela
-        setLocationRelativeTo(null);
 
     }
 
@@ -164,7 +153,8 @@ public class Tela_add extends javax.swing.JFrame {
         getContentPane().add(input_titulo);
         input_titulo.setBounds(120, 60, 270, 30);
 
-        pack();
+        setSize(new java.awt.Dimension(539, 591));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addActionPerformed
@@ -203,8 +193,10 @@ public class Tela_add extends javax.swing.JFrame {
 
     private void button_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_voltarActionPerformed
         // Criar uma nova instância da tela Professor
+        
         Professor telaProfessor = new Professor();
         telaProfessor.setVisible(true);
+        telaProfessor.setSize(515, 248);
         // Ocultar a tela de exclusão atual
         this.dispose();
     }//GEN-LAST:event_button_voltarActionPerformed

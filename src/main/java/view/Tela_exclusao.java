@@ -4,9 +4,6 @@
  */
 package view;
 
-//import java.awt.event.ActionEvent;
-import conexaoBD.ConexaoLivro;
-import java.awt.HeadlessException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
@@ -24,15 +21,7 @@ public class Tela_exclusao extends javax.swing.JFrame {
      */
     public Tela_exclusao() {
         initComponents();
-        setWindowProperties();
-    }
-    // Método para definir as propriedades da janela
-    private void setWindowProperties() {
-        // Define o tamanho da janela
-        setSize(673,500);
-        
-        // Centraliza a janela
-        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -82,63 +71,44 @@ public class Tela_exclusao extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Título:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 40, 60, 21);
 
         input_titulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_tituloActionPerformed(evt);
             }
         });
-        getContentPane().add(input_titulo);
-        input_titulo.setBounds(90, 40, 220, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Autor:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(320, 40, 60, 21);
 
         input_autor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_autorActionPerformed(evt);
             }
         });
-        getContentPane().add(input_autor);
-        input_autor.setBounds(380, 40, 220, 30);
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Gênero:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 80, 70, 21);
 
         input_genero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_generoActionPerformed(evt);
             }
         });
-        getContentPane().add(input_genero);
-        input_genero.setBounds(90, 80, 220, 30);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Nº de Páginas:");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(320, 120, 120, 30);
-        getContentPane().add(input_numero);
-        input_numero.setBounds(440, 120, 160, 30);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Biblioteca Senac");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(240, 0, 200, 26);
 
         button_voltar.setText("Voltar");
         button_voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,38 +116,24 @@ public class Tela_exclusao extends javax.swing.JFrame {
                 button_voltarActionPerformed(evt);
             }
         });
-        getContentPane().add(button_voltar);
-        button_voltar.setBounds(50, 410, 90, 24);
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Editora:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(320, 80, 70, 30);
-        getContentPane().add(input_editora);
-        input_editora.setBounds(380, 80, 220, 30);
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Estoque:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 160, 80, 30);
 
         input_estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_estoqueActionPerformed(evt);
             }
         });
-        getContentPane().add(input_estoque);
-        input_estoque.setBounds(90, 160, 220, 30);
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Ano Publicação:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 120, 130, 30);
-        getContentPane().add(input_ano);
-        input_ano.setBounds(140, 120, 170, 30);
 
         button_pesquisar.setText("Pesquisar");
         button_pesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,8 +141,6 @@ public class Tela_exclusao extends javax.swing.JFrame {
                 button_pesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(button_pesquisar);
-        button_pesquisar.setBounds(160, 410, 100, 24);
 
         button_editar.setText("Editar");
         button_editar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,8 +148,6 @@ public class Tela_exclusao extends javax.swing.JFrame {
                 button_editarActionPerformed(evt);
             }
         });
-        getContentPane().add(button_editar);
-        button_editar.setBounds(280, 410, 90, 24);
 
         button_excluir.setText("Excluir");
         button_excluir.addActionListener(new java.awt.event.ActionListener() {
@@ -203,28 +155,26 @@ public class Tela_exclusao extends javax.swing.JFrame {
                 button_excluirActionPerformed(evt);
             }
         });
-        getContentPane().add(button_excluir);
-        button_excluir.setBounds(390, 410, 90, 24);
 
         table_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "Gênero", "Editora", "Nº de Páginas", "Ano de Publicação", "Estoque", "ISBN"
+                "id", "Título", "Autor", "Gênero", "Editora", "Nº de Páginas", "Ano de Publicação", "Estoque", "ISBN"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -233,22 +183,15 @@ public class Tela_exclusao extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table_list);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 210, 640, 180);
-
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("ISBN:");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(320, 160, 60, 30);
 
         input_isbn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_isbnActionPerformed(evt);
             }
         });
-        getContentPane().add(input_isbn);
-        input_isbn.setBounds(380, 160, 220, 30);
 
         button_devolver.setText("Devolver");
         button_devolver.addActionListener(new java.awt.event.ActionListener() {
@@ -256,11 +199,110 @@ public class Tela_exclusao extends javax.swing.JFrame {
                 button_devolverActionPerformed(evt);
             }
         });
-        getContentPane().add(button_devolver);
-        button_devolver.setBounds(500, 410, 100, 24);
 
-        pack();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(input_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(input_autor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(input_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(input_editora, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(input_ano, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(input_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(input_estoque, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(input_isbn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(button_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(button_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(button_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(button_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(button_devolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(input_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(input_autor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(input_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_editora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_ano, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_estoque, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_isbn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(button_voltar)
+                    .addComponent(button_pesquisar)
+                    .addComponent(button_editar)
+                    .addComponent(button_excluir)
+                    .addComponent(button_devolver)))
+        );
+
+        setSize(new java.awt.Dimension(678, 487));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void input_tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_tituloActionPerformed
         // TODO add your handling code here:
@@ -282,7 +324,7 @@ public class Tela_exclusao extends javax.swing.JFrame {
         // Criar uma nova instância da tela Professor
         Professor telaProfessor = new Professor();
         telaProfessor.setVisible(true);
-
+        telaProfessor.setSize(515,248);
         // Ocultar a tela de exclusão atual
         this.dispose();
     }//GEN-LAST:event_button_voltarActionPerformed
@@ -315,7 +357,6 @@ public class Tela_exclusao extends javax.swing.JFrame {
     }//GEN-LAST:event_button_excluirActionPerformed
 
     private void button_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pesquisarActionPerformed
-        
         String titulo = input_titulo.getText();
         String autor = input_autor.getText();
         String genero = input_genero.getText();
@@ -356,38 +397,48 @@ public class Tela_exclusao extends javax.swing.JFrame {
 
     private void button_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_editarActionPerformed
                 
-    int row = table_list.getSelectedRow();
-    if (row == -1) {
-        JOptionPane.showMessageDialog(null, "Por favor, selecione um livro na tabela.");
-        return;
+        int selectedRow = table_list.getSelectedRow();
+        int colunaSelecionada = table_list.getSelectedColumn();
+        
+        if (selectedRow >= 0) {
+            String titulo = table_list.getValueAt(selectedRow, 0).toString();
+            
+            System.out.println("Titulo: " + titulo);
+            String autor = table_list.getValueAt(selectedRow, 1).toString();
+            String genero = table_list.getValueAt(selectedRow, 2).toString();
+            String editora = table_list.getValueAt(selectedRow, 3).toString();
+            String numeroPaginas = table_list.getValueAt(selectedRow, 5).toString();
+            String anoPublicacao = table_list.getValueAt(selectedRow, 4).toString();      
+            String estoque = table_list.getValueAt(selectedRow, 6).toString();
+            String isbn = table_list.getValueAt(selectedRow, 7).toString();
+
+        try {
+            Livro livro = new Livro();
+            livro.editarLivro(livro);
+            livro.setTitulo(titulo);
+            livro.setAutor(autor);
+            livro.setGenero(genero);
+            livro.setEditora(editora);
+            livro.setNumeroPaginas(numeroPaginas);
+            livro.setAnoPublicacao(anoPublicacao);
+            livro.setestoque(estoque);
+            livro.setIsbn(isbn);
+        
+        System.out.println("Tentando editar o livro: " + livro);
+        livro.editarLivro(livro); // Chama o método para editar o livro
+        System.out.println("Livro editado com sucesso!");
+
+        JOptionPane.showMessageDialog(null, "Livro editado com sucesso!");
+         button_pesquisarActionPerformed(evt); // Chama o método de pesquisa para atualizar a tabela
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao editar livro: " + e.getMessage());
+        e.printStackTrace(); // Imprime o stack trace para debugging
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage());
+        e.printStackTrace(); // Imprime o stack trace para debugging
     }
-
-    try {
-        String titulo = input_titulo.getText();
-        String autor = input_autor.getText();
-        String genero = input_genero.getText();
-        String editora = input_editora.getText();       
-        String anoPublicacao = input_ano.getText();
-        String numeroPaginas = input_numero.getText();
-        String estoque = input_estoque.getText();
-        String isbn = input_isbn.getText();
-
-        Livro livro = new Livro();
-        livro.setTitulo(titulo);
-        livro.setAutor(autor);
-        livro.setGenero(genero);
-        livro.setEditora(editora);       
-        livro.setAnoPublicacao(anoPublicacao);
-        livro.setNumeroPaginas(numeroPaginas);
-        livro.setestoque(estoque);
-        livro.setIsbn(isbn);
-
-        ConexaoLivro conexaoLivro = new ConexaoLivro();
-        conexaoLivro.editarLivro(livro);
-
-        JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso.");
-    } catch (HeadlessException e) {
-        JOptionPane.showMessageDialog(null, "Erro na edição: " + e.getMessage());
+    } else {
+        JOptionPane.showMessageDialog(null, "Por favor, selecione um livro para editar.");
         }
     }//GEN-LAST:event_button_editarActionPerformed
 

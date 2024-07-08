@@ -245,28 +245,15 @@ public class Livro {
         }
     }
     // Método para excluir livro
-    public void excluirLivro(String isbn) throws SQLException {
+    public void excluirLivro(String titulo) throws SQLException {
         
-        Connection conn = getConnection();
-        String sql = "DELETE FROM tb_livros WHERE titulo = ? AND autor = ? AND genero = ? AND ano_publicacao = ?";
-
-        PreparedStatement stmt = conn.prepareStatement(sql);
-
-        // Adicionando mais informações de depuração
-        System.out.println("SQL Query: " + sql);
-        System.out.println("Parâmetros: " + this.titulo + ", " + this.autor + ", " + this.genero + ", " + this.anoPublicacao);
-
-        stmt.setString(1, this.titulo);
-        stmt.setString(2, this.autor);
-        stmt.setString(3, this.genero);
-        stmt.setString(4, this.anoPublicacao);
-        stmt.executeUpdate();
+        String sql = "DELETE FROM tb_livros WHERE TITULO = ?";
         
-        int rowsAffected = stmt.executeUpdate();
-    if (rowsAffected > 0) {
-        System.out.println("Livro excluído com sucesso!");
-    } else {
-        System.out.println("Nenhum livro encontrado com os parâmetros fornecidos.");
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, titulo);
+            stmt.executeUpdate();
         }
     }
         public void editarLivro(Livro livro) throws SQLException {
@@ -274,17 +261,17 @@ public class Livro {
        
         try (Connection conn = getConnection()) {
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, livro.getTitulo());
-            pstm.setString(2, livro.getAutor());
-            pstm.setString(3, livro.getGenero());
-            pstm.setString(4, livro.getEditora());
-            pstm.setString(5, livro.getAnoPublicacao());
-            pstm.setString(6, livro.getNumeroPaginas());
-            pstm.setString(7, livro.getestoque());
-            pstm.setString(8, livro.getIsbn());
+            pstm.setString(0, livro.getTitulo());
+            pstm.setString(1, livro.getAutor());
+            pstm.setString(2, livro.getGenero());
+            pstm.setString(3, livro.getEditora());
+            pstm.setString(4, livro.getAnoPublicacao());
+            pstm.setString(5, livro.getNumeroPaginas());
+            pstm.setString(6, livro.getestoque());
+            pstm.setString(7, livro.getIsbn());
 
             int rowsUpdated = pstm.executeUpdate();
-            if (rowsUpdated > 0) {
+            if (rowsUpdated >= 0 ) {
                 System.out.println("Livro atualizado com sucesso.");
             } else {
                 System.out.println("Nenhum livro encontrado com o ISBN fornecido.");
